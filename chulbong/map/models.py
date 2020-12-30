@@ -4,7 +4,7 @@ from django.db import models
 
 class Map(models.Model):
     id = models.IntegerField(db_column='id', primary_key=True)
-    lat = models.DecimalField(db_column='lat', max_digits = 65, decimal_places = 10 )
+    lat = models.DecimalField(db_column='lat', max_digits = 65, decimal_places = 15 )
     lng = models.FloatField(db_column='lng')
 
     class Meta:

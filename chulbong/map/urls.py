@@ -23,6 +23,5 @@ urlpatterns = [
     path('', views.home, name="home"),
     path('map/', views.map, name="map"),
     path('map/regPoint', views.regPoint, name="legPoint"),
-#    path('where', views.where, name="where")
-    path('map/request', views.request, name="request"),
+    path('', views.request, name="request"),
 ]

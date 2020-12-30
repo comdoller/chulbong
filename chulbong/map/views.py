@@ -7,29 +7,13 @@ import json
 
 # Create your views here.
 
-class HttpResponseNoContent(HttpResponse):
-    """Special HTTP response with no content, just headers.
-
-    The content operations are ignored.
-    """
-
-    def __init__(self, content= "", mimetype=None, status=None, content_type=None):
-        super().__init__(status=204)
-
-        if "content-type" in self._headers:
-            del self._headers["content-type"]
-
-    def _set_content(self, value):
-        pass
-
-    def _get_content(self, value):
-        pass
-
 def home(request):
     return render(request, 'map/index.html')
 
 def map(request):
     chulbongAll = Map.objects.all()
+
+    where =''
 
     if request.method == 'POST':
         where = request.POST['where']
@@ -37,15 +21,11 @@ def map(request):
 
     return render(request, 'map/map.html', {'points' : chulbongAll, 'where': where})
 
-@csrf_exempt
+
 def regPoint(request):
-    
-    print('호출')
+
     lat = request.GET['lat']
     lng = request.GET['lng']
-
-    print(lat)
-    print(lng)
 
     qs = Map(lat=lat, lng=lng)
     qs.save()
@@ -54,6 +34,7 @@ def regPoint(request):
 
     return HttpResponse(json.dumps(context), content_type="application/json")
 
+@csrf_exempt
 def request(request):
 
     title = request.POST['title']
@@ -65,7 +46,8 @@ def request(request):
     qs = Board(title=title, content=content)
     qs.save()
 
-    return HttpResponseNoContent()
+    return HttpResponse(status=204)
+
 
 
 

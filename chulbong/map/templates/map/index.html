@@ -3,83 +3,137 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width", initial-scale=1.0>
-     <script src="https://code.jquery.com/jquery-latest.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <script src="https://code.jquery.com/jquery-latest.js"></script>
     <link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
-    <title>Title</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;700&display=swap" rel="stylesheet">
+   <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+
+    <title>철봉지도</title>
 </head>
 <body>
 
-<div>
-        <p>
-            현재 위치를 입력하세요. ex) 강원대도서관
+<header>
+    <nav>
+        <div id="title_wraper">
+            <span id="day">매일</span><span id="chulbong">철봉</span>
+        </div>
+
+        <div id="message_wraper">
+            <i id ="message" class="far fa-paper-plane"></i>
+        </div>
+
+        <div id="info_wraper">
+            <i id="info" class="fas fa-info"></i>
+        </div>
+    </nav>
+</header>
+
+
+<div id="main">
+    <form action="{% url 'map:map' %}" method="post">
+        {% csrf_token %}
+        <p class="form__group field">
+            <input type="text" class="form__field" placeholder="어디있어요" name="where" required />
+            <button type="submit" id="submit">제출</button>
         </p>
-    </div>
+    </form>
+</div>
+<div id="message_modal">
 
-    <div>
-        <form action="{% url 'map:map' %}" method="post">
-            {% csrf_token %}
-            <input type="text" name="where"/>
-            <button type="submit">Submit</button>
-        </form>
-
-    </div>
-
-
-<button type='button' id="modal_btn">문의하시져</button>
-<div class="black_bg"></div>
-
-<div class="modal_wrap" >
-    <div class="modal_close"><a href="#">close</a></div>
-    <div>
-
-        <form action="{% url 'map:request' %}" method="post" role="form" style="width:100%; height:auto;" enctype="multipart/form-data">
+ <form id = 'reg_massgae' action="{% url 'map:request' %}" method="post" role="form" style="width:100%; height:auto;" enctype="multipart/form-data">
                 {% csrf_token %}
-                <div class="form-group">
-                    <input type="text" name="title" class="form-control" placeholder="title"  required/>
-                    <div class="validate"></div>
-                </div>
+                    <input type="text" name="title" id = "title"placeholder="title" required/>
+                    <textarea  name="content" id="content" rows="5"></textarea>
 
-
-                <div class="form-group">
-                    <textarea class="form-control" name="content" rows="5" data-rule="note" data-msg="Please write something for us" placeholder="eg"></textarea>
-                    <div class="validate"></div>
-                </div>
-
-                <div class="text-center"><button class="btn-primary" id="submit"type="submit" title="Send Message">등록</button></div>
+                <button id="message_submit" type="submit" title="Send Message">등록</button>
             </form>
+</div>
+
+<div id="info_modal">
+    개발자 : 정동호 <br>
+    문의사항 : nearermg@gmail.com
+</div>
+
+        <script>
+            function modal(id) {
+                var zIndex = 9999;
+                var modal = document.getElementById(id);
+
+                // 모달 div 뒤에 희끄무레한 레이어
+                var bg = document.createElement('div');
+                bg.id='background';
+                bg.setStyle({
+                    position: 'fixed',
+                    zIndex: zIndex,
+                    left: '0px',
+                    top: '0px',
+                    width: '100%',
+                    height: '100%',
+                    overflow: 'auto',
+                    // 레이어 색갈은 여기서 바꾸면 됨
+                    backgroundColor: 'rgba(0,0,0,0.4)'
+                });
+                document.body.append(bg);
+
+                // 뒷배경 클릭시 모달 닫기
+                document.getElementById('background').addEventListener('click', function() {
+                bg.remove();
+                modal.style.display = 'none';
+                });
+
+                document.getElementById('message_submit').addEventListener('click', function() {
+                bg.remove();
+                modal.style.display = 'none';
+                });
+
+                modal.setStyle({
+                    position: 'fixed',
+                    display: 'block',
+                    boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+
+                    // 시꺼먼 레이어 보다 한칸 위에 보이기
+                    zIndex: zIndex + 1,
+
+                    // div center 정렬
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    msTransform: 'translate(-50%, -50%)',
+                    webkitTransform: 'translate(-50%, -50%)'
+                });
+            }
+
+            // Element 에 style 한번에 오브젝트로 설정하는 함수 추가
+            Element.prototype.setStyle = function(styles) {
+                for (var k in styles) this.style[k] = styles[k];
+                return this;
+            };
+
+            document.getElementById('info_wraper').addEventListener('click', function() {
+                // 모달창 띄우기
+                modal('info_modal');
+            });
+
+            document.getElementById('message_wraper').addEventListener('click', function() {
+                // 모달창 띄우기
+                modal('message_modal');
+            });
 
 
-    </div>
-<div>
-
-    <script>
-    window.onload = function() {
-
-    function onClick() {
-        document.querySelector('.modal_wrap').style.display ='block';
-        document.querySelector('.black_bg').style.display ='block';
-    }
-    function offClick() {
-        document.querySelector('.modal_wrap').style.display ='none';
-        document.querySelector('.black_bg').style.display ='none';
-    }
-
-    document.getElementById('modal_btn').addEventListener('click', onClick);
-    document.querySelector('.modal_close').addEventListener('click', offClick);
-    document.getElementById('submit').addEventListener('click', offClick);
-
-};
-</script>
 
 
 
 
 
-
-
-
+        </script>
 
 </body>
+
+
+
 </html>
