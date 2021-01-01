@@ -1,4 +1,3 @@
-
 $primary: #11998e;
 $secondary: #38ef7d;
 $white: #fff;
@@ -15,10 +14,17 @@ body{
     width: 100%;
     margin: 0 auto;
     text-align: center;
+    background-color: "#f5f5f5";
 }
+
+a {
+    text-decoration:none
+    }
 
 header{
     position: fixed;
+    height: 75px;
+    z-index: 9999;
     top: 0;
     left: 0;
     right: 0;
@@ -129,21 +135,43 @@ m__group {
 
 #message_modal{
                 display: none;
-                width: 200px;
-                padding: 20px 60px;
+                width: 300px;
+                padding: 20px;
                 background-color: #fefefe;
                 border: 1px solid #888;
-                border-radius: 3px;
+                border-radius: 15px;
             }
 
 #info_modal{
                 display: none;
-                width: 200px;
-                padding: 20px 60px;
+                width: 300px;
+                padding: 20px;
                 background-color: #fefefe;
                 border: 1px solid #888;
-                border-radius: 3px;
+                border-radius: 15px;
+}
 
+h2{
+    width:180px;
+    color:#78788c;
+}
+
+input, textarea {
+
+  width:250px;
+  padding:20px;
+  box-sizing:borderbox;
+  background:none;
+  outline:none;
+  resize:none;
+  border:0;font-family:'Montserrat',sans-serif;
+  transition:all .3s;
+  border-bottom:1px solid #bebed2;
+  -webkit-border-radius: 0;
+}
+
+input, textarea:focus{
+  border-bottom:1px solid #78788c;
 }
 
 
@@ -157,8 +185,3 @@ m__group {
         background:#eee;
         z-index: 2;
    }
-
-
-
-
-

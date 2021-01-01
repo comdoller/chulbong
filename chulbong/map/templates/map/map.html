@@ -1,50 +1,33 @@
+{% extends 'base.html' %}
 {% load static %}
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width", initial-scale=1.0>
-    <link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
-    <title>클릭한 위치에 마커 표시하기</title>
-</head>
-<body>
+{% block body %}
+{% include "header.html" %}
 
-<header>
-    <div id="wrapper">
-        <nav>
-           <!-- <img id="modal_btn" src="{% static 'assets/img/request.png'%}" width="10%" /> -->
-            <img id="logo" src="{% static 'assets/img/logo.png'%}" />
-        </nav>
-   </div>
-</header>
+<body style="background-color: #f5f5f5;">
 
 
-
-<!--<div id="points">
-    {% for s in points %}
-    <li>{{ s.lat }}, {{ s.lng }} </li>
-    {% endfor %}
-</div>-->
-
-
-<div id="map" class="map" style="width:600px;height:800px;">
-
- <div class="modal_wrap" id="modal_wrap">
-
+<div id="map" class="map" style="width:600px;height:700px;">
+    <div class="modal_wrap" id="modal_wrap">
         <input type = "button" id="regPoint" value="추가">
-
-
-</div>
+    </div>
 </div>
 
 
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f35122d8765e7b1eb75f9fb0ee7482fc&libraries=services"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script>
 
 var lat;
 var lng;
+
+
+if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+        lat = position.coords.latitude;
+        lng = position.coords.longitude;
+    });
+} else {
+    // Fallback for no geolocation
+}
 
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div
     mapOption = {
@@ -52,9 +35,9 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
         level: 1 // 지도의 확대 레벨
     };
 
+
 // 지도를 생성합니다
 var map = new kakao.maps.Map(mapContainer, mapOption);
-
 
 // 주소-좌표 변환 객체를 생성합니다
 var geocoder = new kakao.maps.services.Geocoder();
@@ -65,16 +48,7 @@ geocoder.addressSearch('{{where}}', function(result, status) {
     // 정상적으로 검색이 완료됐으면
      if (status === kakao.maps.services.Status.OK) {
 
-
-
         var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-
-        // 결과값으로 받은 위치를 마커로 표시합니다
-        var marker = new kakao.maps.Marker({
-            map: map,
-            position: coords
-        });
-
         // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
         map.setCenter(coords);
     }
@@ -166,15 +140,11 @@ $('#regPoint').click(function(){
     function offClick() {
         document.querySelector('.modal_wrap').style.display ='none';
     }
-
     document.getElementById('map').addEventListener('click', onClick);
-
-
 };
-
-
 
 </script>
 
+{% endblock %}
 </body>
 </html>

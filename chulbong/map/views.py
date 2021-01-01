@@ -1,4 +1,4 @@
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from .models import Map
 from. models import Board
@@ -34,8 +34,10 @@ def regPoint(request):
 
     return HttpResponse(json.dumps(context), content_type="application/json")
 
-@csrf_exempt
+
 def request(request):
+
+    print("호출")
 
     title = request.POST['title']
     content = request.POST['content']
@@ -46,7 +48,7 @@ def request(request):
     qs = Board(title=title, content=content)
     qs.save()
 
-    return HttpResponse(status=204)
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 
