@@ -1,0 +1,24 @@
+{% load static %}
+{% load sass_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <script src="https://code.jquery.com/jquery-latest.js"></script>
+    <link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+    <link href="{% sass_src 'assets/css/button.scss' %}" rel="stylesheet" type="text/css" />
+    <link href="{% sass_src 'assets/css/add.scss' %}" rel="stylesheet" type="text/css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f35122d8765e7b1eb75f9fb0ee7482fc&libraries=services"></script>
+
+    <title>철봉지도</title>
+</head>
+
+{% block body %}
+{% endblock %}

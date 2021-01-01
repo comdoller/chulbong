@@ -1,0 +1,28 @@
+/*
+writer : Simon Busborg
+original source : https://codepen.io/simonbusborg/pen/cyxad
+Thanks
+*/
+:root { --color-dark:  #161616; --color-ocean:  #416dea; --color-grass: #3dd28d; --color-snow: #FFFFFF; --color-salmon: #F32C52; --color-sun: #feee7d; --color-alge: #7999a9; --color-flower: #353866; --color-smoke: #e4e4e4; --borderRadius: 36px; }
+
+:root .button-container { display: flex; margin: 2px auto; flex-wrap: wrap; justify-content: center; }
+
+:root .button { display: flex; overflow: hidden; margin: 2px; padding: 12px 12px; cursor: pointer; user-select: none; transition: all 150ms linear; text-align: center; white-space: nowrap; text-decoration: none !important; text-transform: none; text-transform: capitalize; color: #fff; border: 0 none; border-radius: var(--borderRadius); font-size: 13px; font-family: 'Noto Sans KR', sans-serif; font-weight: 700; line-height: 1.3; -webkit-appearance: none; -moz-appearance: none; appearance: none; justify-content: center; align-items: center; flex: 0 0 160px; box-shadow: 2px 5px 10px var(--color-smoke); }
+
+:root .button:hover { transition: all 150ms linear; opacity: .85; }
+
+:root .button:active { transition: all 150ms linear; opacity: .75; }
+
+:root .button:focus { outline: 1px dotted #959595; outline-offset: -4px; }
+
+:root .button.-regular { color: #202129; background-color: #f2f2f2; }
+
+:root .button.-regular:hover { color: #202129; background-color: #e1e2e2; opacity: 1; }
+
+:root .button.-regular:active { background-color: #d5d6d6; opacity: 1; }
+
+:root .button.-blue { color: var(--color-snow); background: var(--color-ocean); }
+
+:root .button.-board { font-weight: 500; flex: 0 0 270px; border-radius: 1px; }
+
+/*# sourceMappingURL=button.css.map */

@@ -1,5 +1,7 @@
 from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
+from django.urls import reverse
+
 from .models import Map
 from. models import Board
 from django.views.decorators.csrf import csrf_exempt
@@ -17,9 +19,19 @@ def map(request):
 
     if request.method == 'POST':
         where = request.POST['where']
-        print(where)
+
+    if request.method == 'GET' :
+        lat = request.GET['lat']
+        lng = request.GET['lng']
+        context = {'lat': lat, 'lng': lng}
+        return render(request, 'map/map.html', {'points': chulbongAll, 'lat': lat, 'lng': lng})
+
+        #return HttpResponse(json.dumps(context), content_type="application/json")
+        #return JsonResponse(context)
+
 
     return render(request, 'map/map.html', {'points' : chulbongAll, 'where': where})
+    #return render(request, 'map/map.html', {'points': chulbongAll, 'where': where})
 
 
 def regPoint(request):

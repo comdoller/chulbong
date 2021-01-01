@@ -173,15 +173,3 @@ input, textarea {
 input, textarea:focus{
   border-bottom:1px solid #78788c;
 }
-
-
-
-.modal_wrap
-{
-      display: none;
-        position: absolute;
-        text-align: center;
-
-        background:#eee;
-        z-index: 2;
-   }
