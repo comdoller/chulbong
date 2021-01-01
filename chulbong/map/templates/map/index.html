@@ -7,10 +7,10 @@
 
 
 <div id="main">
-    <form id = "search" action="{% url 'map:map' %}" method="post">
+    <form id = "search" name="search" action="{% url 'map:map' %}" method="post">
         {% csrf_token %}
         <p class="form__group field">
-            <input type="text" class="form__field" placeholder="어디있어요" name="where" required />
+            <input type="text" class="form__field" placeholder="어디있어요" id = "where" name="where" required />
             <div class='container' onclick="javascript:document.getElementById('search').submit();" >
                 <div class="button-container">
                 <div class='button -regular'>GO</div>
@@ -24,6 +24,16 @@
     </div>
 </div>
 </div>
+
+<!-- Android Viewport height fix
+stackoverflow : https://stackoverflow.com/questions/8556933
+-->
+<script type="text/javascript">
+var isAndroid = navigator.userAgent.toLowerCase().indexOf("android") > -1; //&& ua.indexOf("mobile");
+if(isAndroid) {
+    document.write('<meta name="viewport" content="width=device-width,height='+window.innerHeight+', initial-scale=1.0">');
+}
+</script>
 
 <!--<script>
      $('#getGps').click(function(){

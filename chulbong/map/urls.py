@@ -25,3 +25,6 @@ urlpatterns = [
     path('map/regPoint', views.regPoint, name="legPoint"),
     path('map/request', views.request, name="request"),
 ]
+
+
+

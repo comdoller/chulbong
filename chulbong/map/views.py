@@ -1,6 +1,6 @@
 from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
-from django.urls import reverse
+
 
 from .models import Map
 from. models import Board
@@ -61,10 +61,6 @@ def request(request):
     qs.save()
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-
-
-
-
 
 
 
