@@ -133,6 +133,8 @@ m__group {
   &:required,&:invalid { box-shadow:none; }
 }
 
+
+
 #message_modal{
                 display: none;
                 width: 300px;

@@ -20,11 +20,11 @@ def map(request):
     if request.method == 'POST':
         where = request.POST['where']
 
-    if request.method == 'GET' :
-        lat = request.GET['lat']
-        lng = request.GET['lng']
-        context = {'lat': lat, 'lng': lng}
-        return render(request, 'map/map.html', {'points': chulbongAll, 'lat': lat, 'lng': lng})
+#    if request.method == 'GET' :
+#        lat = request.GET['lat']
+#        lng = request.GET['lng']
+#        context = {'lat': lat, 'lng': lng}
+#        return render(request, 'map/map.html', {'points': chulbongAll, 'lat': lat, 'lng': lng})
 
         #return HttpResponse(json.dumps(context), content_type="application/json")
         #return JsonResponse(context)
