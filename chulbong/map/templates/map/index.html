@@ -11,7 +11,7 @@
         {% csrf_token %}
         <p class="form__group field">
             <input type="text" class="form__field" placeholder="어디있어요" id = "where" name="where" required />
-            <div class='container' onclick="javascript:document.getElementById('search').submit();" >
+            <div class='container' id="submit" >
                 <div class="button-container">
                 <div class='button -regular'>GO</div>
                 </div>
@@ -52,6 +52,17 @@ if(isAndroid) {
         })
     })
 </script>-->
+
+<script>
+    document.getElementById('submit').addEventListener('click', function() {
+                if(document.getElementById("where").value){
+                    document.getElementById('search').submit();
+                }
+                else{
+                    alert("지역을 입력해주세요.");
+                }
+            });
+</script>
 
 
 
