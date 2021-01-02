@@ -30,10 +30,13 @@ var geocoder = new kakao.maps.services.Geocoder();
 
 // 주소검색
 geocoder.addressSearch('{{where}}', function(result, status) {
-
      if (status === kakao.maps.services.Status.OK) {
         var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
         map.setCenter(coords);
+    }
+    else{
+        alert("지역명으로 검색해주세요.");
+        location.replace('https://chulbong.kr');
     }
 });
 
