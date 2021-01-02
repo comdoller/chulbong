@@ -81,9 +81,12 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'map',
         'USER': 'root',
-        'PASSWORD': '1234',
-        'HOST': '127.0.0.1',
+        'PASSWORD': 'wjd2620307',
+        'HOST': 'database-1.ctbkfvfeqeo3.us-east-2.rds.amazonaws.com',
         'ROOT': '3306',
+        'OPTIONS': {
+            'init_command': 'SET sql_mode="STRICT_TRANS_TABLES"'
+        }
     }
 }
 
