@@ -79,10 +79,10 @@ WSGI_APPLICATION = 'chulbong.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'map',
+        'NAME': 'chulbong',
         'USER': 'root',
         'PASSWORD': 'wjd2620307',
-        'HOST': 'database-1.ctbkfvfeqeo3.us-east-2.rds.amazonaws.com',
+        'HOST': 'chulbong.cdp0c2ue7jsf.ap-northeast-2.rds.amazonaws.com',
         'ROOT': '3306',
         'OPTIONS': {
             'init_command': 'SET sql_mode="STRICT_TRANS_TABLES"'
