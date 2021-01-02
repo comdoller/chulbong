@@ -1,0 +1,6 @@
+
+[dev]
+libsass>=0.13
+
+[management-command]
+django-compressor>=2.4
