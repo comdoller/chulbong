@@ -8,6 +8,7 @@
 
 <div id="map" class="map" style="width: 100%; min-height:100vh;"></div>
 <div id="regPoint" class="pulsating-circle"></div>
+<div id="checkmark">+</div>
 
 <script>
 
@@ -96,6 +97,13 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
 
 
     $('#regPoint').click(function(){
+
+    if( lat <= 126 || lng <= 126 || lng >= 129.6 ){
+         alert("위치를 다시 확인해주세요.");
+         return;
+         }
+
+
     if (window.confirm("위치를 추가할까요?")) {
             $.ajax({
                 url: 'regPoint',
@@ -165,6 +173,11 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
 });
 
     $('#regPoint').click(function(){
+
+    if( lat <= 126 || lng <= 126 || lng >= 129.6 ){
+         alert("위치를 다시 확인해주세요.");
+         return;
+         }
 
     if (window.confirm("위치를 추가할까요?")) {
             $.ajax({
