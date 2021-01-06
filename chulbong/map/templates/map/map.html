@@ -8,15 +8,11 @@
 
 <div id="map" class="map" style="width: 100%; min-height:100vh;"></div>
 <div id="regPoint" class="pulsating-circle"></div>
-<div id="checkmark">+</div>
 
 <script>
-
-document.getElementById('map').addEventListener('click', function() {
+    document.getElementById('map').addEventListener('click', function() {
     document.getElementById('regPoint').style.display = 'block';
     });
-
-{% if where %}
 
 var lat, lng;
 
@@ -28,6 +24,9 @@ var mapContainer = document.getElementById('map'),
 
 var map = new kakao.maps.Map(mapContainer, mapOption);
 var geocoder = new kakao.maps.services.Geocoder();
+
+
+{% if where %}
 
 // 주소검색
 geocoder.addressSearch('{{where}}', function(result, status) {
@@ -42,9 +41,6 @@ geocoder.addressSearch('{{where}}', function(result, status) {
 });
 
 {% else %}
-
- var lat, lng;
-
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
             lat = position.coords.latitude+'';
@@ -56,74 +52,14 @@ geocoder.addressSearch('{{where}}', function(result, status) {
             level: 1 // 지도의 확대 레벨
             };
 
-            var map = new kakao.maps.Map(mapContainer, mapOption);
 
-
-var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
-
-for (var i = 0; i < positions.length; i ++) {
-
-    var imageSize = new kakao.maps.Size(24, 35);
-    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
-
-    var marker = new kakao.maps.Marker({
-        map: map,
-        position: positions[i].latlng,
-        title : positions[i].title, // 마커 타이틀, 추후구현
-        image : markerImage
-    });
-}
-
-var marker = new kakao.maps.Marker({
-    position: map.getCenter()
-
-});
-
-marker.setMap(map);
-
-// clickevent
-kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
-
-    var latlng = mouseEvent.latLng;
-
-    marker.setPosition(latlng);
-
-    var message = 'lat : ' + latlng.getLat() + ' ';
-    message += 'lng :  ' + latlng.getLng();
-
-    lat = latlng.getLat()+'';
-    lng = latlng.getLng()+'';
-});
-
-
-    $('#regPoint').click(function(){
-
-  if( lat >= 38.30 || lng <= 126 || lng >= 129.6 ){
-         alert("위치를 다시 확인해주세요.");
-         return;
-         }
-
-    if (window.confirm("위치를 추가할까요?")) {
-            $.ajax({
-                url: 'regPoint',
-                data: {
-                    'lat': lat,
-                    'lng': lng
-                },
-                dataType: 'json',
-                success: function(response){
-                alert("감사합니다 :)");
-                }
             });
+            var map = new kakao.maps.Map(mapContainer, mapOption);
+        }
+
+        else{
+            alert("위치정보를 가져올 수 없습니다.");
             }
-        });
-    }); // ajax
-
-
-    } // if (navigator.geolocation) // 해당 API가 if 안에서만 동작 이유 모르겠음;
-    else {
-        alert("위치정보를 가져올 수 없습니다.");
-    }
 
 {% endif %}
 
@@ -149,14 +85,15 @@ for (var i = 0; i < positions.length; i ++) {
         title : positions[i].title,
         image : markerImage
     });
+
 }
 
 var marker = new kakao.maps.Marker({
     position: map.getCenter()
-
 });
 
 marker.setMap(map);
+
 
 kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
 

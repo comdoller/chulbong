@@ -5,8 +5,8 @@
 
 <body style="background-color: #f5f5f5;">
 
-
 <div id="main">
+
     <form id = "search" name="search" action="{% url 'map:map' %}" method="post">
         {% csrf_token %}
         <p class="form__group field">
@@ -35,23 +35,6 @@ if(isAndroid) {
 }
 </script>
 
-<!--<script>
-     $('#getGps').click(function(){
-            $.ajax({
-                url: 'map',
-                data: {
-                    'lat': lat,
-                    'lng': lng
-                },
-            dataType: 'json',
-            type:'GET',
-            success: function(context){
-                //window.location.href ='./map?'+'lat='+context.lat+'&lng='+context.lng;
-                //window.location.href ='./map;
-            }
-        })
-    })
-</script>-->
 
 <script>
     document.getElementById('submit').addEventListener('click', function() {
@@ -63,9 +46,6 @@ if(isAndroid) {
                 }
             });
 </script>
-
-
-
 
 {% endblock %}
 </body>
