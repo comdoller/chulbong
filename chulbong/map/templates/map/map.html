@@ -16,10 +16,6 @@
 
 <script>
 
-    document.getElementById('map').addEventListener('click', function() {
-    document.getElementById('regPoint').style.display = 'block';
-    });
-
 var lat, lng;
 
 var mapContainer = document.getElementById('map'),
@@ -31,8 +27,14 @@ var mapContainer = document.getElementById('map'),
 var map = new kakao.maps.Map(mapContainer, mapOption);
 var geocoder = new kakao.maps.services.Geocoder();
 
+    document.getElementById('map').addEventListener('click', function() {
+    document.getElementById('regPoint').style.display = 'block';
+    });
+
 
 {% if where %}
+
+
 
 // 주소검색
 geocoder.addressSearch('{{where}}', function(result, status) {
@@ -47,6 +49,7 @@ geocoder.addressSearch('{{where}}', function(result, status) {
 });
 
 {% else %}
+
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
             lat = position.coords.latitude+'';
@@ -58,14 +61,11 @@ geocoder.addressSearch('{{where}}', function(result, status) {
             level: 1 // 지도의 확대 레벨
             };
 
+            var map = new kakao.maps.Map(mapContainer, mapOption);
 
             });
-            var map = new kakao.maps.Map(mapContainer, mapOption);
-        }
 
-        else{
-            alert("위치정보를 가져올 수 없습니다.");
-            }
+        }
 
 {% endif %}
 
@@ -113,11 +113,7 @@ var marker = new kakao.maps.Marker({
     position: map.getCenter()
 });
 
-
-
 marker.setMap(map);
-
-
 
 
 kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
@@ -142,8 +138,11 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
 
     if (window.confirm("위치를 추가할까요?")) {
 
+            var RegExp = /[ \{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=]/gi;
+
             do{
             var content = prompt( '간단한 위치설명을 남겨주세요.' );
+
 
             } while(content !== null && content === "")
 
