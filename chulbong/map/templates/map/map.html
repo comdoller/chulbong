@@ -24,7 +24,7 @@ var lat, lng;
 
 var mapContainer = document.getElementById('map'),
     mapOption = {
-        center: new kakao.maps.LatLng(37.863423999999995, 127.7394944),
+        center: new kakao.maps.LatLng(0, 0),
         level: 1
     };
 
@@ -58,12 +58,6 @@ geocoder.addressSearch('{{where}}', function(result, status) {
             });
         }
         function displayMarker(locPosition) {
-
-    // 마커를 생성합니다
-    var marker = new kakao.maps.Marker({
-        map: map,
-        position: locPosition
-    });
 
     map.setCenter(locPosition);
 }
