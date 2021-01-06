@@ -71,4 +71,9 @@
                 modal('message_modal');
             });
 
+           /* document.getElementById('detail_wraper').addEventListener('click', function() {
+                // 모달창 띄우기
+                modal('detail_modal');
+            });*/
+
 

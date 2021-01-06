@@ -38,8 +38,9 @@ def regPoint(request):
 
     lat = request.GET['lat']
     lng = request.GET['lng']
+    content = request.GET['content']
 
-    qs = Map(lat=lat, lng=lng)
+    qs = Map(lat=lat, lng=lng, content=content)
     qs.save()
 
     context = {'foo': 'bar'}

@@ -9,7 +9,13 @@
 <div id="map" class="map" style="width: 100%; min-height:100vh;"></div>
 <div id="regPoint" class="pulsating-circle"></div>
 
+<div id="detail_modal" style="background-color: #f5f5f5;">
+    <p id="detail_p">
+    </p>
+</div>
+
 <script>
+
     document.getElementById('map').addEventListener('click', function() {
     document.getElementById('regPoint').style.display = 'block';
     });
@@ -66,7 +72,16 @@ geocoder.addressSearch('{{where}}', function(result, status) {
 var positions = [
     {% for s in points %}
     {
+
+        {% if s.content %}
+
+        title : '{{ s.content }}',
         latlng: new kakao.maps.LatLng({{ s.lat }}, {{ s.lng }})
+        {% else %}
+        latlng: new kakao.maps.LatLng({{ s.lat }}, {{ s.lng }})
+        {% endif %}
+
+
     },
     {% endfor %}
 ];
@@ -86,13 +101,23 @@ for (var i = 0; i < positions.length; i ++) {
         image : markerImage
     });
 
+     kakao.maps.event.addListener(marker, 'click', function() {
+       <!-- alert ( this['Fb'] );-->
+        document.getElementById('detail_p').innerHTML = this['Fb'];
+        modal('detail_modal');
+
+    });
 }
 
 var marker = new kakao.maps.Marker({
     position: map.getCenter()
 });
 
+
+
 marker.setMap(map);
+
+
 
 
 kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
@@ -116,11 +141,22 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
          }
 
     if (window.confirm("위치를 추가할까요?")) {
+
+            do{
+            var content = prompt( '간단한 위치설명을 남겨주세요.' );
+
+            } while(content !== null && content === "")
+
+            if(content == null){
+            return;
+            }
+
             $.ajax({
                 url: 'regPoint',
                 data: {
                     'lat': lat,
-                    'lng': lng
+                    'lng': lng,
+                    'content' : content
                 },
                 dataType: 'json',
                 success: function(response){
@@ -129,6 +165,9 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
            });
     }
 });
+
+
+
 </script>
 
 {% endblock %}

@@ -54,6 +54,8 @@ header{
 }
 
 
+
+
 #day{
     font-weight:700;
     color: #2E2E2E;
@@ -69,7 +71,12 @@ header{
     text-align :left;
     font-size: 14px;
     color: gray;
+}
 
+#detail_p{
+    text-align :left;
+    font-size: 14px;
+    color: gray;
 }
 
 #main{
@@ -157,6 +164,16 @@ m__group {
                 background-color: #fefefe;
                 border: 1px solid #888;
                 border-radius: 15px;
+}
+
+#detail_modal{
+                display: none;
+                width: 300px;
+                padding: 20px;
+                background-color: #fefefe;
+                border: 1px solid #888;
+                border-radius: 15px;
+                z-index: 99999;
 }
 
 h2{
