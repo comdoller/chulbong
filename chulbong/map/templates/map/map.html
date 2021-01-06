@@ -16,6 +16,10 @@
 
 <script>
 
+    document.getElementById('map').addEventListener('click', function() {
+    document.getElementById('regPoint').style.display = 'block';
+    });
+
 var lat, lng;
 
 var mapContainer = document.getElementById('map'),
@@ -27,14 +31,7 @@ var mapContainer = document.getElementById('map'),
 var map = new kakao.maps.Map(mapContainer, mapOption);
 var geocoder = new kakao.maps.services.Geocoder();
 
-    document.getElementById('map').addEventListener('click', function() {
-    document.getElementById('regPoint').style.display = 'block';
-    });
-
-
 {% if where %}
-
-
 
 // 주소검색
 geocoder.addressSearch('{{where}}', function(result, status) {
@@ -55,17 +52,21 @@ geocoder.addressSearch('{{where}}', function(result, status) {
             lat = position.coords.latitude+'';
             lng = position.coords.longitude+'';
 
-            var mapContainer = document.getElementById('map'),
-            mapOption = {
-            center: new kakao.maps.LatLng(lat, lng),
-            level: 1 // 지도의 확대 레벨
-            };
-
-            var map = new kakao.maps.Map(mapContainer, mapOption);
+            var locPosition = new kakao.maps.LatLng(lat, lng);
+            displayMarker(locPosition);
 
             });
-
         }
+        function displayMarker(locPosition) {
+
+    // 마커를 생성합니다
+    var marker = new kakao.maps.Marker({
+        map: map,
+        position: locPosition
+    });
+
+    map.setCenter(locPosition);
+}
 
 {% endif %}
 
@@ -80,7 +81,6 @@ var positions = [
         {% else %}
         latlng: new kakao.maps.LatLng({{ s.lat }}, {{ s.lng }})
         {% endif %}
-
 
     },
     {% endfor %}
@@ -115,7 +115,6 @@ var marker = new kakao.maps.Marker({
 
 marker.setMap(map);
 
-
 kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
 
     var latlng = mouseEvent.latLng;
@@ -138,11 +137,8 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
 
     if (window.confirm("위치를 추가할까요?")) {
 
-            var RegExp = /[ \{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=]/gi;
-
             do{
             var content = prompt( '간단한 위치설명을 남겨주세요.' );
-
 
             } while(content !== null && content === "")
 
@@ -164,8 +160,6 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
            });
     }
 });
-
-
 
 </script>
 
