@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime
 
 # Create your models here.
 
@@ -19,6 +20,7 @@ class Board(models.Model):
     id=models.IntegerField(db_column='id', primary_key=True)
     title=models.TextField(db_column='title')
     content=models.TextField(db_column='content')
+    date = models.DateTimeField(default=datetime.now, blank=True)
 
     class Meta:
         managed = False
