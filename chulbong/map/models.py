@@ -8,6 +8,8 @@ class Map(models.Model):
     lat = models.DecimalField(db_column='lat', max_digits = 65, decimal_places = 15 )
     lng = models.FloatField(db_column='lng')
     content=models.TextField(db_column='content')
+    c_cnt=models.IntegerField(db_column='c_cnt')
+    p_cnt=models.IntegerField(db_column='p_cnt')
 
     class Meta:
         managed = False

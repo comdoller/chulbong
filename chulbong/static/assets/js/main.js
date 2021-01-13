@@ -38,6 +38,11 @@
                 modal.style.display = 'none';
                 });
 
+               /* document.getElementById('add_info').addEventListener('click', function() {
+                bg.remove();
+                modal.style.display = 'none';
+                });*/
+
                 modal.setStyle({
                     position: 'fixed',
                     display: 'block',

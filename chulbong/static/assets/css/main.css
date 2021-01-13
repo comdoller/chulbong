@@ -79,6 +79,11 @@ header{
     color: gray;
 }
 
+#add_p{
+    font-size: 14px;
+    color: gray;
+}
+
 #main{
     position: absolute; left: 50%; top: 30%;
     transform: translate(-50%, -50%); text-align: center;
@@ -98,6 +103,31 @@ m__group {
   border-bottom: 2px solid $gray;
   outline: 0;
   font-size: 2.2rem;
+  color: $white;
+  padding: 7px 0;
+  background: transparent;
+  transition: border-color 0.2s;
+  font-weight:700;
+  text-align: center;
+
+  &::placeholder {
+    color: transparent;
+  }
+
+  &:placeholder-shown ~ .form__label {
+    font-size: 1.3rem;
+    cursor: text;
+    top: 20px;
+  }
+}
+
+.form__field_add {
+
+  width: 30%;
+  border: 0;
+  border-bottom: 2px solid $gray;
+  outline: 0;
+  font-size: 1.8rem;
   color: $white;
   padding: 7px 0;
   background: transparent;
@@ -176,6 +206,17 @@ m__group {
                 z-index: 99999;
 }
 
+#add_modal{
+                display: none;
+                width: 300px;
+                padding: 20px;
+                background-color: #fefefe;
+                border: 1px solid #888;
+                border-radius: 15px;
+                z-index: 99999;
+}
+
+
 h2{
     width:180px;
     color:#78788c;
@@ -183,9 +224,9 @@ h2{
 
 input, textarea {
 
-  font-size: 14px;
+  font-size: 16px;
   width:250px;
-  padding:20px;
+  padding:10px;
   box-sizing:borderbox;
   background:none;
   outline:none;
@@ -200,6 +241,104 @@ input, textarea:focus{
   border-bottom:1px solid #78788c;
 }
 
+.add{
+       font-size: 16px;
+}
+
+
+@import "compass/css3";
+
+.form-select {
+    @include user-select(none);
+
+    background: #ffffff;
+    overflow: hidden;
+    border: 1px solid #cbcbcb;
+    border-radius: 3px;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.1), inset 0 0 10px rgba(0, 0, 0, 0.07);
+
+    @include single-transition(box-shadow, 0.2s);
+
+    &:focus,
+    &:hover {
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    }
+
+    &:after {
+        content: '▾';
+        position: absolute;
+        top: 0;
+        right: 12px;
+        z-index: 1;
+        color: #bbbbbb;
+        line-height: 40px;
+        font-size: 14px;
+
+        .ie & {
+            display: none;
+        }
+    }
+}
+
+
+
+select {
+    position: relative;
+    background: transparent;
+    background-image: none;
+    display: block;
+    width: 100%;
+    outline: none;
+    color: #888888;
+    cursor: pointer;
+    z-index: 2;
+    border: none;
+    padding: 10px 10px 10px 5px;
+    // This is so hacky.. (for Firefox)
+    // Removes the default select arrow.
+    text-overflow: '';
+    text-indent: 5px;
+    // End of brutal hack
+
+    @include appearance(none);
+
+    &[multiple=multiple] {
+        height: auto;
+        border: 1px solid #cbcbcb;
+        border-radius: 3px;
+        box-shadow: 0 0 1px rgba(0, 0, 0, 0.1), inset 0 0 10px rgba(0, 0, 0, 0.07);
+
+        @include single-transition(box-shadow, 0.2s);
+
+        &:hover {
+            border-color: #cccccc;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+    }
+
+    option[disabled] {
+        color: #eeeeee;
+        text-shadow: none;
+        border: none;
+    }
+}
+
+select:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 #888888;
+}
+
+select::-ms-expand {
+    display: none;
+}
+
+/*==========  Generic styling  ==========*/
+
+.column-6 {
+   position: absolute;
+   left: 11%;
+   width: 270px;
+}
 
 
 
