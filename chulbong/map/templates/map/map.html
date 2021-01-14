@@ -113,8 +113,7 @@ var positions = [
         title : '{{ s.content }}',
         latlng: new kakao.maps.LatLng({{ s.lat }}, {{ s.lng }})
 
-
-        {% if s.c_cnt %}
+        {% if s.c_cnt or s.p_cnt %}
         ,c_cnt : {{s.c_cnt}},
         p_cnt : {{s.p_cnt}}
         {% endif %}
@@ -159,10 +158,6 @@ for (var i = 0; i < positions.length; i ++) {
       if ( this['p_cnt'] != undefined && this['p_cnt'] != 0) {
          document.getElementById('p_cnt').innerHTML = '평행봉<b>  ' + this['p_cnt'] + '</b>';
         }
-
-
-
-
 
         document.getElementById('detail_p').innerHTML = this['Fb'];
         modal('detail_modal');
