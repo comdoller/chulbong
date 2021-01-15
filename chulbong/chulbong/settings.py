@@ -77,8 +77,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'chulbong',
-        'USER': '####',
-        'PASSWORD': '####',
+        'USER': 'root',
+        'PASSWORD': 'wjd2620307',
         'HOST': 'chulbong.cdp0c2ue7jsf.ap-northeast-2.rds.amazonaws.com',
         'ROOT': '3306',
         'OPTIONS': {
@@ -131,6 +131,7 @@ STATIC_DIR = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [
     STATIC_DIR,
 ]
+STATIC_ROOT = os.path.join(ROOT_DIR, '.static_root')
 
 SASS_PROCESSOR_ENABLED = True
 SASS_PROCESSOR_ROOT = os.path.join(BASE_DIR, 'static')

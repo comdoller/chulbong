@@ -1,6 +1,4 @@
-
         /*
-            모달창
             저작자 : 슷호브 New 훌로구
             원문주소 : https://stove99.github.io/javascript/2019/04/19/javasript-center-modal/
             감사합니다.
@@ -38,11 +36,6 @@
                 modal.style.display = 'none';
                 });
 
-               /* document.getElementById('add_info').addEventListener('click', function() {
-                bg.remove();
-                modal.style.display = 'none';
-                });*/
-
                 modal.setStyle({
                     position: 'fixed',
                     display: 'block',
@@ -75,10 +68,5 @@
                 // 모달창 띄우기
                 modal('message_modal');
             });
-
-           /* document.getElementById('detail_wraper').addEventListener('click', function() {
-                // 모달창 띄우기
-                modal('detail_modal');
-            });*/
 
 

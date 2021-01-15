@@ -10,7 +10,6 @@
 <div id="regPoint" class="pulsating-circle"></div>
 
 <div id="detail_modal" style="background-color: #f5f5f5;">
-
     <p id="cnt_info">
     <span id="c_cnt"></span> <br>
     <span id="p_cnt"></span> <br><br>
@@ -23,40 +22,28 @@
 
 <div id="add_modal" style="background-color: #f5f5f5;">
     <p id="add_p">
-
         <form id = 'add_chulbong_info' action="#" method="post" role="form" style="width:100%; height:auto;" enctype="multipart/form-data">
             {% csrf_token %}
-                    <span class="add">&nbsp&nbsp&nbsp철봉</span>
-                    <input type="number" class="form__field_add" name="chulbong_cnt" id="chulbong_cnt" min="0" step="1" value="0" placeholder="N"/>
-                    <span class="add">개</span><br>
-                    <span class="add">평행봉</span>
-                    <input type="number" class="form__field_add" name="Parallel_cnt" id="Parallel_cnt" min="0" step="1" value="0" placeholder="N"/>
-                    <span class="add">개</span><br><br>
-
-                    <!--<div class="column-6 form-select">
-                        <select name="" id="">
-                            <option value="" disabled="disabled" selected="selected">== 철봉 유형을 선택해주세요 ==</option>
-                            <option value="1">허리높이 철봉 ~ 180이상 다양함</option>
-                            <option value="2">180 이하 제한적</option>
-                            <option value="3">어린이 철봉</option>
-                        </select>
-                    </div>-->
-                    <br>
-                    <input type="text" name="content" id="content_add" placeholder="참고사항, 예)공원 불이 9시에 꺼집니다." required/>
-                    <br>
-                    <br>
-                    <div class='container'>
-                        <div class="button-container">
-                        <div id="add_info" class='button -regular -board'>등록</div>
-                        </div>
-                    </div>
+            <span class="add">&nbsp&nbsp&nbsp철봉</span>
+            <input type="number" class="form__field_add" name="chulbong_cnt" id="chulbong_cnt" min="0" step="1" value="0" placeholder="N"/>
+            <span class="add">개</span><br>
+            <span class="add">평행봉</span>
+            <input type="number" class="form__field_add" name="Parallel_cnt" id="Parallel_cnt" min="0" step="1" value="0" placeholder="N"/>
+            <span class="add">개</span><br><br>
+            <br>
+            <input type="text" name="content" id="content_add" placeholder="참고사항, 예)공원 불이 9시에 꺼집니다." required/>
+            <br>
+            <br>
+            <div class='container'>
+                <div class="button-container">
+                    <div id="add_info" class='button -regular -board'>등록</div>
+                </div>
+            </div>
         </form>
     </p>
 </div>
 
-
 <script>
-
     document.getElementById('map').addEventListener('click', function() {
     document.getElementById('regPoint').style.display = 'block';
     });
@@ -74,13 +61,13 @@ var geocoder = new kakao.maps.services.Geocoder();
 
 {% if where %}
 
-// 주소검색
+// 주소로 검색할 경우
 geocoder.addressSearch('{{where}}', function(result, status) {
      if (status === kakao.maps.services.Status.OK) {
         var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
         map.setCenter(coords);
-    }
-    else{
+     }
+     else{
         alert("지역명으로 검색해주세요.");
         location.replace('https://chulbong.kr');
     }
@@ -88,18 +75,17 @@ geocoder.addressSearch('{{where}}', function(result, status) {
 
 {% else %}
 
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-            lat = position.coords.latitude+'';
-            lng = position.coords.longitude+'';
+if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+        lat = position.coords.latitude+'';
+        lng = position.coords.longitude+'';
 
-            var locPosition = new kakao.maps.LatLng(lat, lng);
+        var locPosition = new kakao.maps.LatLng(lat, lng);
             displayMarker(locPosition);
+        });
+}
 
-            });
-        }
-        function displayMarker(locPosition) {
-
+function displayMarker(locPosition) {
     map.setCenter(locPosition);
 }
 
@@ -108,7 +94,6 @@ geocoder.addressSearch('{{where}}', function(result, status) {
 var positions = [
     {% for s in points %}
     {
-
         {% if s.content %}
         title : '{{ s.content }}',
         latlng: new kakao.maps.LatLng({{ s.lat }}, {{ s.lng }})
@@ -121,7 +106,6 @@ var positions = [
         {% else %}
         latlng: new kakao.maps.LatLng({{ s.lat }}, {{ s.lng }})
         {% endif %}
-
     },
     {% endfor %}
 ];
@@ -129,9 +113,7 @@ var positions = [
 var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
 
 for (var i = 0; i < positions.length; i ++) {
-
     var imageSize = new kakao.maps.Size(24, 35);
-
     var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
 
     var marker = new kakao.maps.Marker({
@@ -145,23 +127,22 @@ for (var i = 0; i < positions.length; i ++) {
     marker.p_cnt = positions[i].p_cnt;
 
 
-     kakao.maps.event.addListener(marker, 'click', function() {
+    kakao.maps.event.addListener(marker, 'click', function() {
 
-     document.getElementById('c_cnt').innerHTML = '';
-     document.getElementById('p_cnt').innerHTML = '';
-     document.getElementById('detail_p').innerHTML = '';
+    document.getElementById('c_cnt').innerHTML = '';
+    document.getElementById('p_cnt').innerHTML = '';
+    document.getElementById('detail_p').innerHTML = '';
 
-      if ( this['c_cnt'] != undefined && this['c_cnt'] != 0 ) {
+    if ( this['c_cnt'] != undefined && this['c_cnt'] != 0 ) {
         document.getElementById('c_cnt').innerHTML = '철봉<b>  ' + this['c_cnt'] + '</b>';
-        }
+    }
 
-      if ( this['p_cnt'] != undefined && this['p_cnt'] != 0) {
-         document.getElementById('p_cnt').innerHTML = '평행봉<b>  ' + this['p_cnt'] + '</b>';
-        }
+    if ( this['p_cnt'] != undefined && this['p_cnt'] != 0) {
+        document.getElementById('p_cnt').innerHTML = '평행봉<b>  ' + this['p_cnt'] + '</b>';
+    }
 
-        document.getElementById('detail_p').innerHTML = this['Fb'];
-        modal('detail_modal');
-
+    document.getElementById('detail_p').innerHTML = this['Fb'];
+    modal('detail_modal');
     });
 }
 
@@ -174,34 +155,30 @@ marker.setMap(map);
 kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
 
     var latlng = mouseEvent.latLng;
-
     marker.setPosition(latlng);
-
-    var message = 'lat : ' + latlng.getLat() + ' ';
-    message += 'lng :  ' + latlng.getLng();
 
     lat = latlng.getLat()+'';
     lng = latlng.getLng()+'';
 });
 
- $('#regPoint').click(function(){
 
-   if( lat >= 38.30 || lng <= 126 || lng >= 129.6 ){
-         alert("위치를 다시 확인해주세요.");
-         return;
-         }
+$('#regPoint').click(function(){
+    if( lat >= 38.30 || lng <= 126 || lng >= 129.6 ){
+        alert("위치를 다시 확인해주세요.");
+        return;
+    }
 
-         modal('add_modal');
+    modal('add_modal');
 
-         $('#add_info').click(function(){
+    $('#add_info').click(function(){
+        var c_cnt = document.getElementById("chulbong_cnt").value,
+            p_cnt = document.getElementById("Parallel_cnt").value,
+            content_add = document.getElementById('content_add').value;
 
-         var c_cnt = document.getElementById("chulbong_cnt").value,
-         p_cnt = document.getElementById("Parallel_cnt").value,
-         content_add = document.getElementById('content_add').value;
+        var emptyCheck = document.getElementById("content_add").value;
 
-         var emptyCheck = document.getElementById("content_add").value;
-         if( emptyCheck ){
-          $.ajax({
+        if( emptyCheck ){
+            $.ajax({
                 url: 'regPoint',
                 data: {
                     'lat': lat,
@@ -215,18 +192,18 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
                 alert("감사합니다 :)");
                 }
            });
-            $("#background").trigger("click");
-         }
-         else {
+
+           $("#background").trigger("click");
+        }
+
+        else {
             alert("설명을 추가해주세요");
             return;
          }
-           });
+    });
 
 });
 </script>
-
-
 {% endblock %}
 </body>
 </html>

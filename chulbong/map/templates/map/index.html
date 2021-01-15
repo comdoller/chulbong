@@ -6,7 +6,6 @@
 <body style="background-color: #f5f5f5;">
 
 <div id="main">
-
     <form id = "search" name="search" action="{% url 'map:map' %}" method="post">
         {% csrf_token %}
         <p class="form__group field">
@@ -25,28 +24,7 @@
 </div>
 </div>
 
-<!-- Android Viewport height fix
-stackoverflow : https://stackoverflow.com/questions/8556933
--->
-<script type="text/javascript">
-var isAndroid = navigator.userAgent.toLowerCase().indexOf("android") > -1; //&& ua.indexOf("mobile");
-if(isAndroid) {
-    document.write('<meta name="viewport" content="width=device-width,height='+window.innerHeight+', initial-scale=1.0">');
-}
-</script>
-
-
-<script>
-    document.getElementById('submit').addEventListener('click', function() {
-                if(document.getElementById("where").value){
-                    document.getElementById('search').submit();
-                }
-                else{
-                    alert("지역을 입력해주세요.");
-                }
-            });
-</script>
-
+<script type="text/javascript" src="{% static 'assets/js/index.js' %}"></script>
 {% endblock %}
 </body>
 </html>
