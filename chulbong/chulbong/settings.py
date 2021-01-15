@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'map',
     'sass_processor',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -47,6 +48,14 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+]
+
+CORS_ORIGIN_WHITELIST = [
+    'http://127.0.0.1:8000',
+    'http://192.168.31.139:8000',
+    'https://chulbong.kr',
+    'https://www.chulbong.kr'
 ]
 
 ROOT_URLCONF = 'chulbong.urls'
@@ -76,8 +85,8 @@ WSGI_APPLICATION = 'chulbong.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'chulbong',
-        'USER': 'root',
+        'NAME': '####',
+        'USER': '####',
         'PASSWORD': 'wjd2620307',
         'HOST': 'chulbong.cdp0c2ue7jsf.ap-northeast-2.rds.amazonaws.com',
         'ROOT': '3306',
@@ -131,7 +140,7 @@ STATIC_DIR = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [
     STATIC_DIR,
 ]
-STATIC_ROOT = os.path.join(ROOT_DIR, '.static_root')
+STATIC_ROOT = os.path.join(ROOT_DIR, 'chulbong/.static_root')
 
 SASS_PROCESSOR_ENABLED = True
 SASS_PROCESSOR_ROOT = os.path.join(BASE_DIR, 'static')
