@@ -30,7 +30,6 @@ class Board(models.Model):
         return ""
 
 class HitCount(models.Model):
-    ip = models.CharField(db_column='ip', max_length=15, default=None, null=True)  # ip 주소
     date = models.DateTimeField(db_column='date' , default=datetime.now, blank=True)  # 조회수가 올라갔던 날짜
     hit = models.IntegerField(db_column='hit')
 
