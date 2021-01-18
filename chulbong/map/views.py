@@ -1,12 +1,24 @@
+from datetime import datetime
+
 from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from .models import Map
-from. models import Board
+from. models import Board, HitCount
+from django.utils.dateformat import DateFormat
+
 import json
 
-# Create your views here.
-
 def home(request):
+
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+        qs = HitCount(ip=ip)
+        qs.save()
+        print(ip)
+
     return render(request, 'map/index.html')
 
 def map(request):
@@ -44,6 +56,7 @@ def request(request):
     qs.save()
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
 
 
 
