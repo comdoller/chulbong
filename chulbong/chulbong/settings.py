@@ -85,9 +85,9 @@ WSGI_APPLICATION = 'chulbong.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': '####',
+        'NAME': 'chulbong',
         'USER': '####',
-        'PASSWORD': 'wjd2620307',
+        'PASSWORD': '####',
         'HOST': 'chulbong.cdp0c2ue7jsf.ap-northeast-2.rds.amazonaws.com',
         'ROOT': '3306',
         'OPTIONS': {
