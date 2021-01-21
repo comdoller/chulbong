@@ -184,6 +184,7 @@ $('#regPoint').off("click").click(function(){
         if( emptyCheck ){
             $.ajax({
                 url: 'regPoint',
+                type: 'POST',
                 data: {
                     'lat': lat,
                     'lng': lng,

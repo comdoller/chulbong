@@ -2,6 +2,8 @@ from datetime import datetime
 
 from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
+from django.views.decorators.csrf import csrf_exempt
+
 from .models import Map
 from. models import Board, HitCount
 from django.utils.dateformat import DateFormat
@@ -26,14 +28,15 @@ def map(request):
 
     return render(request, 'map/map.html', {'points' : chulbongAll, 'where': where})
 
+@csrf_exempt
 def regPoint(request):
 
-    lat = request.GET['lat']
-    lng = request.GET['lng']
-    content = request.GET['content']
+    lat = request.POST['lat']
+    lng = request.POST['lng']
+    content = request.POST['content']
 
-    c_cnt = request.GET['c_cnt']
-    p_cnt = request.GET['p_cnt']
+    c_cnt = request.POST['c_cnt']
+    p_cnt = request.POST['p_cnt']
 
     qs = Map(lat=lat, lng=lng, c_cnt=c_cnt, p_cnt=p_cnt, content=content)
     qs.save()
