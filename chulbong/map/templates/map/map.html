@@ -4,6 +4,8 @@
 {% block body %}
 {% include "header.html" %}
 
+
+
 <body style="background-color: #f5f5f5;">
 
 <div id="map" class="map" style="width: 100%; min-height:100vh;"></div>
@@ -161,8 +163,7 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
     lng = latlng.getLng()+'';
 });
 
-
-$('#regPoint').click(function(){
+$('#regPoint').off("click").click(function(){
     if( lat >= 38.30 || lng <= 126 || lng >= 129.6 ){
         alert("위치를 다시 확인해주세요.");
         return;
@@ -170,12 +171,15 @@ $('#regPoint').click(function(){
 
     modal('add_modal');
 
-    $('#add_info').click(function(){
-        var c_cnt = document.getElementById("chulbong_cnt").value,
+    $('#add_info').off("click").click(function(){
+
+            c_cnt = document.getElementById("chulbong_cnt").value,
             p_cnt = document.getElementById("Parallel_cnt").value,
             content_add = document.getElementById('content_add').value;
 
         var emptyCheck = document.getElementById("content_add").value;
+
+        if ( $.isNumeric(c_cnt) && $.isNumeric(p_cnt) ) {
 
         if( emptyCheck ){
             $.ajax({
@@ -190,18 +194,27 @@ $('#regPoint').click(function(){
                 dataType: 'json',
                 success: function(response){
                 alert("감사합니다 :)");
+                $("#background").trigger("click");
+
+                document.getElementById("chulbong_cnt").value='';
+                document.getElementById("Parallel_cnt").value='';
+                document.getElementById('content_add').value='';
+
                 }
            });
-
-           $("#background").trigger("click");
         }
-
         else {
             alert("설명을 추가해주세요");
             return;
          }
-    });
+    }
 
+     else {
+        alert("숫자를 입력해주세요");
+        return;
+        }
+
+    });
 });
 </script>
 {% endblock %}

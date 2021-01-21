@@ -30,7 +30,7 @@
                 modal.style.display = 'none';
                 });
 
-                document.getElementById('message_submit').addEventListener('click', function() {
+                $('#message_submit').off("click").click(function() {
                 alert("감사합니다. :)");
                 bg.remove();
                 modal.style.display = 'none';
