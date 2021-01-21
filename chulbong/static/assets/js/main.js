@@ -1,3 +1,8 @@
+        var agent = navigator.userAgent.toLowerCase();
+        if ( (navigator.appName == 'Netscape' && navigator.userAgent.search('Trident') != -1) || (agent.indexOf("msie") != -1) ) {
+            alert("죄송합니다. 현재 인터넷익스플로러 브라우저 환경에서는 화면이 정상적으로 표시되지 않습니다. 크롬을 이용해 주세요.");
+        }
+
         /*
             저작자 : 슷호브 New 훌로구
             원문주소 : https://stove99.github.io/javascript/2019/04/19/javasript-center-modal/
