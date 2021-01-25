@@ -36,9 +36,19 @@
                 });
 
                 $('#message_submit').off("click").click(function() {
+
+                if(document.getElementById("title").value && document.getElementById("content").value){
+                document.getElementById('reg_massage').submit();
                 alert("감사합니다. :)");
                 bg.remove();
                 modal.style.display = 'none';
+                }
+                else{
+                    alert("제목/내용을 입력해주세요.");
+                    return;
+                }
+
+
                 });
 
                 modal.setStyle({
