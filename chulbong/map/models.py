@@ -29,12 +29,3 @@ class Board(models.Model):
     def __str__(self):
         return ""
 
-class HitCount(models.Model):
-    date = models.DateTimeField(db_column='date' , default=datetime.now, blank=True)  # 조회수가 올라갔던 날짜
-    hit = models.IntegerField(db_column='hit')
-
-    class Meta:
-        managed = False
-        db_table = 'HitCount'
-
-

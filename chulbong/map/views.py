@@ -1,12 +1,9 @@
-from datetime import datetime
 
-from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, redirect
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
-
 from .models import Map
-from. models import Board, HitCount
-from django.utils.dateformat import DateFormat
+from. models import Board
 
 import json
 
@@ -15,9 +12,6 @@ def home(request):
     return render(request, 'map/index.html')
 
 def map(request):
-
-    qs = HitCount()
-    qs.save()
 
     chulbongAll = Map.objects.all()
 
